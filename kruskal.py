@@ -77,3 +77,4 @@ n = 7
 e = runKruskalAlgorithm(edges, n)
 
 print(e)
+
