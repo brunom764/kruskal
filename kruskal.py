@@ -49,6 +49,7 @@ def runKruskalAlgorithm(edges, n):
         index = index + 1
 
         # encontre a raiz dos conjuntos para os quais dois terminais
+
         # vértices da próxima aresta pertencem
         x = ds.find(src)
         y = ds.find(dest)
@@ -86,9 +87,16 @@ while True:
     except:
         break
 
-print(graph)
+# convert `graph` to a list of edges
+edges = []
+# (u, v, w) tripleto representam a borda não direcionada de
+# vértice `u` para vértice `v` com peso `w`
+for src, neighbors in graph.items():
+    for dest, weight in neighbors.items():
+        edges.append((int(src), int(dest), int(weight)))
+
 # perform Kruskal's algorithm on the graph
-mst = runKruskalAlgorithm(graph, nodes)
+mst = runKruskalAlgorithm(edges, int(nodes))
 
 # print the total weight of the minimum spanning tree
 print(sum(weight for _, _, weight in mst))
