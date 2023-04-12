@@ -5,7 +5,7 @@ class DisjointSet:
     # executa a operação MakeSet
     def makeSet(self, n):
         # cria conjuntos disjuntos `n` (um para cada vértice)
-        for i in range(n):
+        for i in range(int(n)):
             self.parent[i] = i
 
     # Encontre a raiz do conjunto ao qual o elemento `k` pertence
@@ -63,18 +63,32 @@ def runKruskalAlgorithm(edges, n):
 
 
 
-# (u, v, w) tripleto representam a borda não direcionada de
-# vértice `u` para vértice `v` com peso `w`
-edges = [
-        (0, 1, 7), (1, 2, 8), (0, 3, 5), (1, 3, 9), (1, 4, 7), (2, 4, 5),
-        (3, 4, 15), (3, 5, 6), (4, 5, 8), (4, 6, 9), (5, 6, 11)
-    ]
 
- # número total de nós no gráfico (rotulado de 0 a 6)
-n = 7
+with open('jazz.net') as f:
+    lines = f.readlines()
 
-# gráfico de construção
-e = runKruskalAlgorithm(edges, n)
+# read number of nodes
+_, nodes = lines[0].split('     ')
 
-print(e)
+# create an empty adjacency matrix
+i = 2
+graph = {}
+while True:
+    i += 1
+    try:
+        src, dest, weight = lines[i].split()
+        if src not in graph:
+            graph[src] = {}
+        if dest not in graph:
+            graph[dest] = {}
+        graph[src][dest] = weight
+        graph[dest][src] = weight
+    except:
+        break
 
+print(graph)
+# perform Kruskal's algorithm on the graph
+mst = runKruskalAlgorithm(graph, nodes)
+
+# print the total weight of the minimum spanning tree
+print(sum(weight for _, _, weight in mst))
