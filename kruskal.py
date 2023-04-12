@@ -24,7 +24,7 @@ class DisjointSet:    # Classe para representar um conjunto disjunto
         self.parent[x] = y
 
 
-def runKruskalAlgorithm(edges, n): # Função para construir MST usando o algoritmo de Kruskal
+def kruskal(edges, n): # Função para construir MST usando o algoritmo de Kruskal
     MST = [] # armazena as arestas presentes no MST
 
     # Inicializa a classe `DisjointSet`.
@@ -93,7 +93,8 @@ for src, neighbors in graph.items():
         edges.append((int(src), int(dest), int(weight)))
 
 # Kruskal
-mst = runKruskalAlgorithm(edges, int(nodes))
+mst = kruskal(edges, int(nodes))
 
 # Output
-print(mst)
+for m in mst:
+    print(m)
