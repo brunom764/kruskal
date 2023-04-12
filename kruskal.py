@@ -1,41 +1,35 @@
-# Uma classe para representar um conjunto disjunto
-class DisjointSet:
+class DisjointSet:    # Classe para representar um conjunto disjunto
 
     def __init__(self, n):
         self.parent = {i: i for i in range(1, n + 1)}
 
-    # executa a operação MakeSet
-    def makeSet(self, n):
-        # cria conjuntos disjuntos `n` (um para cada vértice)
+    def makeSet(self, n):  # executa a operação MakeSet
+        # cria conjuntos disjuntos n (um para cada vértice)
         for i in range(int(n)):
             self.parent[i] = i
 
-    # Encontre a raiz do conjunto ao qual o elemento `k` pertence
-    def find(self, k):
+    def find(self, k):  # Encontra a raiz do conjunto ao qual o elemento k pertence
         # se `k` for root
         if self.parent[k] == k:
             return k
 
-        # recorrente para o pai até encontrarmos a raiz
+        # recursão até encontrarmos a raiz
         return self.find(self.parent[k])
 
-    # Realiza união de dois subconjuntos
-    def union(self, a, b):
-        # encontra a raiz dos conjuntos aos quais os elementos `x` e `y` pertencem
+    def union(self, a, b): # Realiza união de dois subconjuntos
+        # encontra a raiz dos conjuntos aos quais os elementos x e y pertencem
         x = self.find(a)
         y = self.find(b)
 
         self.parent[x] = y
 
 
-# Função para construir MST usando o algoritmo de Kruskal
-def runKruskalAlgorithm(edges, n):
-    # armazena as arestas presentes no MST
-    MST = []
+def runKruskalAlgorithm(edges, n): # Função para construir MST usando o algoritmo de Kruskal
+    MST = [] # armazena as arestas presentes no MST
 
     # Inicializa a classe `DisjointSet`.
-    # Crie um conjunto singleton para cada elemento do universo.
     ds = DisjointSet(n)
+    # Crie um conjunto disjuntos para cada elemento do universo.
     ds.makeSet(n)
 
     index = 0
@@ -67,14 +61,15 @@ def runKruskalAlgorithm(edges, n):
 
 # Parte principal
 
+# Abrir a base de dados
 with open('jazz.net') as f:
     lines = f.readlines()
 
-# read number of nodes
+# guardar numero de vertices
 _, nodes = lines[0].split('     ')
 
 
-# create an empty adjacency matrix
+# Criar grafo
 graph = {}
 for line in lines:
     if line.startswith('*'):
@@ -88,14 +83,17 @@ for line in lines:
     graph[src][dest] = weight
     graph[dest][src] = weight
 
-# convert `graph` to a list of edges
+# Converter grafo em uma uma lista de vertices
 edges = []
+
 # (u, v, w) triples representam a borda não direcionada de
 # vértice `u` para vértice `v` com peso `w`
 for src, neighbors in graph.items():
     for dest, weight in neighbors.items():
         edges.append((int(src), int(dest), int(weight)))
 
-# perform Kruskal's algorithm on the graph
+# Kruskal
 mst = runKruskalAlgorithm(edges, int(nodes))
+
+# Output
 print(mst)
