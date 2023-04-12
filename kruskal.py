@@ -1,6 +1,8 @@
 # Uma classe para representar um conjunto disjunto
 class DisjointSet:
-    parent = {}
+
+    def __init__(self, n):
+        self.parent = {i: i for i in range(1, n + 1)}
 
     # executa a operação MakeSet
     def makeSet(self, n):
@@ -33,7 +35,7 @@ def runKruskalAlgorithm(edges, n):
 
     # Inicializa a classe `DisjointSet`.
     # Crie um conjunto singleton para cada elemento do universo.
-    ds = DisjointSet()
+    ds = DisjointSet(n)
     ds.makeSet(n)
 
     index = 0
@@ -63,7 +65,7 @@ def runKruskalAlgorithm(edges, n):
     return MST
 
 
-
+# Parte principal
 
 with open('jazz.net') as f:
     lines = f.readlines()
@@ -71,25 +73,24 @@ with open('jazz.net') as f:
 # read number of nodes
 _, nodes = lines[0].split('     ')
 
+
 # create an empty adjacency matrix
-i = 2
 graph = {}
-while True:
-    i += 1
-    try:
-        src, dest, weight = lines[i].split()
-        if src not in graph:
-            graph[src] = {}
-        if dest not in graph:
-            graph[dest] = {}
-        graph[src][dest] = weight
-        graph[dest][src] = weight
-    except:
-        break
+for line in lines:
+    if line.startswith('*'):
+        continue
+
+    src, dest, weight = line.split()
+    if src not in graph:
+        graph[src] = {}
+    if dest not in graph:
+        graph[dest] = {}
+    graph[src][dest] = weight
+    graph[dest][src] = weight
 
 # convert `graph` to a list of edges
 edges = []
-# (u, v, w) tripleto representam a borda não direcionada de
+# (u, v, w) triples representam a borda não direcionada de
 # vértice `u` para vértice `v` com peso `w`
 for src, neighbors in graph.items():
     for dest, weight in neighbors.items():
@@ -97,6 +98,4 @@ for src, neighbors in graph.items():
 
 # perform Kruskal's algorithm on the graph
 mst = runKruskalAlgorithm(edges, int(nodes))
-
-# print the total weight of the minimum spanning tree
-print(sum(weight for _, _, weight in mst))
+print(mst)
