@@ -61,40 +61,41 @@ def kruskal(edges, n): # Função para construir MST usando o algoritmo de Krusk
 
 # Parte principal
 
-# Abrir a base de dados
-with open('jazz.net') as f:
-    lines = f.readlines()
+if __name__ == "__main__":
+    # Abrir a base de dados
+    with open('jazz.net') as f:
+        lines = f.readlines()
 
-# guardar numero de vertices
-_, nodes = lines[0].split('     ')
+    # guardar numero de vertices
+    _, nodes = lines[0].split()
 
 
-# Criar grafo
-graph = {}
-for line in lines:
-    if line.startswith('*'):
-        continue
+    # Criar grafo
+    graph = {}
+    for line in lines:
+        if line.startswith('*'):
+            continue
 
-    src, dest, weight = line.split()
-    if src not in graph:
-        graph[src] = {}
-    if dest not in graph:
-        graph[dest] = {}
-    graph[src][dest] = weight
-    graph[dest][src] = weight
+        src, dest, weight = line.split()
+        if src not in graph:
+            graph[src] = {}
+        if dest not in graph:
+            graph[dest] = {}
+        graph[src][dest] = weight
+        graph[dest][src] = weight
 
-# Converter grafo em uma uma lista de vertices
-edges = []
+    # Converter grafo em uma uma lista de vertices
+    edges = []
 
-# (u, v, w) triples representam a borda não direcionada de
-# vértice `u` para vértice `v` com peso `w`
-for src, neighbors in graph.items():
-    for dest, weight in neighbors.items():
-        edges.append((int(src), int(dest), int(weight)))
+    # (u, v, w) triples representam a borda não direcionada de
+    # vértice `u` para vértice `v` com peso `w`
+    for src, neighbors in graph.items():
+        for dest, weight in neighbors.items():
+            edges.append((int(src), int(dest), int(weight)))
 
-# Kruskal
-mst = kruskal(edges, int(nodes))
+    # Kruskal
+    mst = kruskal(edges, int(nodes))
 
-# Output
-for m in mst:
-    print(m)
+    # Output
+    for m in mst:
+        print(m)
