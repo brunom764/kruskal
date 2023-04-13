@@ -3,13 +3,10 @@ from disjoinSet import DisjointSet
 # Função para construir a MST usando o algoritmo de Kruskal
 def kruskal(edges, n):
     MST = []  # armazena as arestas presentes no MST
-
-    # Inicializa a classe DisjointSet
-    ds = DisjointSet(n)
-    # Cria um conjunto disjunto para cada elemento
-    ds.makeSet(n)
-
     index = 0
+
+    # Inicializa a classe DisjointSet e cria um conjunto disjunto para cada elemento
+    ds = DisjointSet(n)
 
     # classifica as arestas aumentando o peso
     edges.sort(key=lambda x: x[2])
