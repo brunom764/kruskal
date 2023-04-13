@@ -1,2 +1,0 @@
-# kruskal
-Algoritmo Kruskal 
