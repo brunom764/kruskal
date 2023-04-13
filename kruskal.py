@@ -63,7 +63,7 @@ def kruskal(edges, n): # Função para construir MST usando o algoritmo de Krusk
 
 if __name__ == "__main__":
     # Abrir a base de dados
-    with open('jazz.net') as f:
+    with open('jazzNew.net') as f:
         lines = f.readlines()
 
     # guardar numero de vertices

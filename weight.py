@@ -1,6 +1,5 @@
 import random
 
-
 with open('jazz.net') as f:
     lines = f.readlines()
 
@@ -10,7 +9,7 @@ _, nodes = lines[0].split()
 # Criar grafo
 graph = {}
 for line in lines:
-    if line.startswith('*') or not line.strip(): # verifica se a linha está vazia ou começa com *
+    if line.startswith('*') or not line.strip():  # verifica se a linha está vazia ou começa com *
         continue
 
     values = line.rstrip().split()
@@ -18,16 +17,15 @@ for line in lines:
         continue
 
     src, desc, weight = values
-    weight = random.randint(1,184)
     graph.setdefault(src, {})[desc] = weight
 
 
-with open('jazz.net', 'w') as f:
+with open('jazzNew.net', 'w') as f:
     f.write(f"*{len(graph)} {nodes}\n")  # escreve o cabeçalho do arquivo
     for line in lines:
         if line.startswith('*'):
             continue
-        src, desc, weight = line.rstrip().split()
+        src, desc, _ = line.rstrip().split()
         weight = random.randint(1,184)
         temp = [src, desc, str(weight)]
         f.write(" ".join(temp) + "\n")
