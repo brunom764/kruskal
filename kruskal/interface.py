@@ -29,9 +29,11 @@ def drawFigure(canvas, figure):
 
 
 def interface():
-    layout = [[sg.Text('Escolha um arquivo com a base de dados ou escreva manualmente')],
-              [sg.Text('Choose a file: ', enable_events=True), sg.FileBrowse(key='browse', )],
-              [sg.Button('Adicionar base de dados', key='ADDBASE', enable_events=True)],
+    layout = [[sg.Titlebar('Gerador de grafos')],
+              [sg.Button('Adicionar base de dados percurso de Pedro', key='ADDROUTE', enable_events=True)],
+              [sg.Text('Escolha um outro arquivo com a base de dados ou escreva manualmente')],
+              [sg.Text('Choose a file: ', enable_events=True), sg.FileBrowse(key='browse', ),
+              sg.Button('Adicionar base de dados', key='ADDBASE', enable_events=True)],
               [sg.Text('Digite o número de vértices'), sg.Input(key='-VER-'),
                sg.Button('Adicionar número de vértices', key='add', enable_events=True)],
               [sg.Text('Digite a primeira vértice, a segunda vértice e o peso da aresta'), sg.Input(key='-ARE-'),
@@ -51,6 +53,15 @@ def interface():
         if event == 'ADDBASE':
             # Abrir a base de dados
             path = values['browse']
+            with open(path) as f:
+                lines = f.readlines()
+
+            # guardar numero de vertices
+            _, nodes = lines[0].split()
+
+        elif event == 'ADDROUTE':
+            # Abrir a base de dados
+            path = 'jazzNew.net'
             with open(path) as f:
                 lines = f.readlines()
 

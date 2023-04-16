@@ -1,8 +1,8 @@
 from kruskal import kruskal
 
 
+# Cria grafo e retorna a mst
 def route(nodes, lines):
-    # Criar grafo
     grafo = {}
     for line in lines:
         if line.startswith('*'):
@@ -25,10 +25,4 @@ def route(nodes, lines):
     mst = kruskal(arestas, int(nodes))
 
     # Output
-    sumKm = 0
-    for edge in mst:
-        print(f'Pedro se deslocou da loja {edge[0]} até a loja {edge[1]} e percorreu {edge[2]}km.')
-        sumKm += int(edge[2])
-    print('-------- FIM DO PERCURSO --------')
-    print(f'Pedro percorreu {sumKm}km.')
     return mst
