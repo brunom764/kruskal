@@ -29,7 +29,7 @@ def drawFigure(canvas, figure):
 
 
 def interface():
-    layout = [[sg.Titlebar('Gerador de grafos')],
+    layout = [[sg.Titlebar('Algoritmo de Kruskal')],
               [sg.Button('Adicionar base de dados percurso de Pedro', key='ADDROUTE', enable_events=True)],
               [sg.Text('Escolha um outro arquivo com a base de dados ou escreva manualmente')],
               [sg.Text('Choose a file: ', enable_events=True), sg.FileBrowse(key='browse', ),
@@ -38,7 +38,7 @@ def interface():
                sg.Button('Adicionar número de vértices', key='add', enable_events=True)],
               [sg.Text('Digite a primeira vértice, a segunda vértice e o peso da aresta'), sg.Input(key='-ARE-'),
                sg.Button('Adicionar aresta', key='OK', enable_events=True)],
-              [sg.Button('Mostrar grafo', key='-OK-', enable_events=True)],
+              [sg.Button('Gerar caminho de menor custo', key='-OK-', enable_events=True)],
               [sg.Canvas(size=(1000, 1000), key='-CANVAS-')],
               ]
     sg.theme('DarkTeal')
